@@ -1,95 +1,70 @@
-;(function () {
-	
-	'use strict';
-
-
-
-	var isMobile = {
-		Android: function() {
-			return navigator.userAgent.match(/Android/i);
-		},
-			BlackBerry: function() {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-			iOS: function() {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-			Opera: function() {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-			Windows: function() {
-			return navigator.userAgent.match(/IEMobile/i);
-		},
-			any: function() {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+$(document).ready(function() {
+	$(".item-list li").mouseenter(function(){  
+        $(this).find($('.item-list .hover')).stop(true, true).fadeIn(600);
+        return false;
+     });
+      $('.item-list li').mouseleave(function(){  
+        $(this).find($('.item-list .hover')).stop(true, true).fadeOut(400);
+        return false;
+     });
+      jQuery(document).on('click', ".menu_trigger", function (e) {
+        e.preventDefault()
+        window.setTimeout(function() {
+            if(jQuery('#nav').hasClass('clicked')){
+                jQuery('#nav').stop(true,true).animate({height:'hide'},100);
+                jQuery('#nav').removeClass('clicked');
+            }else{
+                jQuery('#nav').stop(true,true).animate({height:'show'},400);
+                jQuery('#nav').addClass('clicked');
+            }
+        }, 400);
+        return false;
+    });
+    jQuery("#nav").on('click', '.drops', function () {
+        if (jQuery(this).hasClass("active")) {
+            jQuery(this).removeClass("active").parent().next().slideUp();
+        } else {
+            jQuery(this).addClass("active").parent().next().slideDown();
+        }
+        return false;
+    });
+// begin add	
+	var $container = $('#container');
+	// init
+	$container.isotope({
+		// options
+		itemSelector: '.item',
+		layoutMode: 'cellsByRow',
+		cellsByRow: {
+			columnWidth: 295,
+			rowHeight: 295
 		}
-	};
-
-	var getHeight = function() {
-		var extraHeight = 0;
-
-		if ( isMobile.any() ) extraHeight = 50;
-		
-		setTimeout(function(){
-			$('#fh5co-main').stop().animate({
-				'height': $('.fh5co-tab-content.active').height() + extraHeight
-			});
-		}, 200);
-	};
-
-	var pieChart = function() {
-		$('.chart').easyPieChart({
-			scaleColor: false,
-			lineWidth: 10,
-			lineCap: 'butt',
-			barColor: '#17e7a4',
-			trackColor:	"#000000",
-			size: 160,
-			animate: 1000
 		});
-	};
-
-	var tabContainer = function() {
-		getHeight();
-		$(window).resize(function(){
-			getHeight();
-		})
-	};
-
-	var tabClickTrigger = function() {
-		$('.fh5co-tab-menu a').on('click', function(event) {
-			event.preventDefault();
-			var $this = $(this),
-				data = $this.data('tab'),
-				pie = $this.data('pie');
-
-			// add/remove active class
-			$('.fh5co-tab-menu li').removeClass('active');
-			$this.closest('li').addClass('active');
-
-			$('.fh5co-tab-content.active').addClass('animated fadeOutDown');
-
-			setTimeout(function(){
-				$('.fh5co-tab-content.active').removeClass('active animated fadeOutDown fadeInUp');
-				$('.fh5co-tab-content[data-content="'+data+'"]').addClass('animated fadeInUp active');
-				getHeight();
-			}, 500);
-
-			if ( pie === 'yes' ) {
-				setTimeout(function(){
-					pieChart();
-				}, 800);
-			}
-			
-		})
-	};
-
-	// Document on load.
-	$(function(){
-		tabContainer();
-		tabClickTrigger();
-
+		
+	$('#filters').on( 'click', 'li', function() {
+		var filterValue = $(this).attr('data-filter');
+		$container.isotope({ filter: filterValue });
+		$( "#filters li" ).removeClass("active");
+		$(this).addClass("active");
 	});
-
-
-}());
+	$('.fancybox').fancybox({
+	  helpers: {
+	    overlay: {
+	      locked: false
+	    }
+	  }
+	});
+// end add	
+}); 
+$(window).resize(function() {
+    if($(document).width() > 768){
+      $( "#nav" ).addClass("active");
+      $( "#nav ul" ).attr('style','');
+      $( "#nav" ).attr('style','');
+      $( "#nav" ).removeClass("clicked");
+      $( "#nav .active" ).removeClass('active');
+    }
+    else {
+        $( "#nav" ).removeClass("active");
+    }
+});
