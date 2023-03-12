@@ -1,0 +1,9 @@
+.m-header-first-line {
+  font-size: 24px;
+}
+
+.m-header-full-name {
+  font-size: clamp(90px, 8vw, 80px);
+}
+
+/*# sourceMappingURL=home.css.map */
