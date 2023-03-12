@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -13,7 +13,7 @@
   }
 }
 
-.App-header {
+.App {
   background-color: #183A1D;
   min-height: 100vh;
   display: flex;
@@ -22,10 +22,32 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
+  font-family: 'Concert One', cursive;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+/* .row {
+  margin-right: -15px;
+  margin-left: -15px;
+} */
+h1 {
+  margin:0;
+}
+
+.m-light-green {
+  color: #E1EEDD
+}
+
+.m-light-yellow {
+  color: #FEFBE9
+}
+
+.m-orange {
+  color: #F0A04B
 }
 
 @keyframes App-logo-spin {
