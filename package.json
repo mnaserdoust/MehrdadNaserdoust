@@ -22,7 +22,8 @@
     "build": "npm-run-all build-css build-js && npm run set-cache-version",
     "test": "react-scripts test",
     "lint": "./node_modules/.bin/eslint src",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "set-cache-version": "sed -i \"s/{{cacheversion}}/$(date '+%s')/g\" ./build/static/js/*.js*",
   },
   "eslintConfig": {
     "extends": [
