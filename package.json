@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "lint": "./node_modules/.bin/eslint src",
     "eject": "react-scripts eject",
-    "set-cache-version": "sed -i \"s/{{cacheversion}}/$(date '+%s')/g\" ./build/static/js/*.js*",
+    "set-cache-version": "sed -i \"s/{{cacheversion}}/$(date '+%s')/g\" ./build/static/js/*.js*"
   },
   "eslintConfig": {
     "extends": [
