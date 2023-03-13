@@ -1,6 +1,7 @@
 {
   "name": "mehrdad",
   "version": "0.1.0",
+  "homepage": "https://mnaserdoust.github.io/MehrdadNaserdoust",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -10,9 +11,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.59.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build-css": "sass ./src/:./src/",
     "watch-css": "npm run build-css && sass ./src/:./src/ --watch",
     "start-js": "react-scripts start",
@@ -21,7 +25,8 @@
     "build": "npm-run-all build-css build-js && npm run set-cache-version",
     "test": "react-scripts test",
     "lint": "./node_modules/.bin/eslint src",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "set-cache-version": "sed -i \"s/{{cacheversion}}/$(date '+%s')/g\" ./build/static/js/*.js*"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +48,7 @@
   },
   "devDependencies": {
     "eslint": "^8.35.0",
-    "eslint-plugin-react": "^7.32.2"
+    "eslint-plugin-react": "^7.32.2",
+    "gh-pages": "^5.0.0"
   }
 }
